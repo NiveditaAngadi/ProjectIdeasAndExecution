@@ -9,6 +9,7 @@ and the "WebSocketStream" interface.
 
 2. What is Socket.IO is?
 Socket.IO is a library that enables low-latency, bidirectional and event-based communication between a client and a server. 
+Socket.IO is a popular library for enabling real-time, bidirectional communication in web and mobile applications. 
 
 The Socket.IO connection can be established with different low-level transports.
 1. HTTP long-polling 
@@ -60,3 +61,10 @@ At the beginning of the Engine.iO connection, server sends some information
 
 By default, the client establishes the connection with the HTTP long-polling transport.
 
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
