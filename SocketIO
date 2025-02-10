@@ -1,1 +1,62 @@
+1. What is WebSocket API?
+
+The WebSocket API makes it possible to open a two-way interactive communication session between the user's browser and a server.
+With this API, you can send messages to a server and receive responses without having to poll the server for a reply.
+
+
+WebSocket API provides two alternative mechanisms for creating and using web socket connections: the "WebSocket" interface 
+and the "WebSocketStream" interface. 
+
+2. What is Socket.IO is?
+Socket.IO is a library that enables low-latency, bidirectional and event-based communication between a client and a server. 
+
+The Socket.IO connection can be established with different low-level transports.
+1. HTTP long-polling 
+2. WebSocket 
+3. WebTransport 
+
+Socket.IO will automatically pick the best available option, depending on:
+1. The capabilities of the browser
+2. The Network 
+
+3. How Socket.IO works?
+The bidrectional channel between the Socket.IO server(Node.js)and the Socket.IO client(browser, Node.js, or another programming language) is established 
+with a WebSocket connection whenever possible, and will use HTTP long-polling as fallback. 
+
+The Socket.IO codebase is split into two distinct layers:
+
+the low-level plumbing: what we call Engine.IO, the engine inside Socket.IO
+the high-level API: Socket.IO itself
+
+There are currently two implemented transports:
+1. HTTP long-polling 
+2. WebSocket 
+
+HTTP long-polling, 
+The HTTP long-polling transport(also simply referred as "polling") consists of successive HTTP requests:
+1. long- running "GET" requests, for receiving data from the server. 
+2. short-running "POST" requests, for sending data to the server. 
+Due to the nature of the transport, successive emits may be concatenated and sent within the same HTTP request.
+
+WebSocket 
+The WebSocket transport consists of, well, of a WebSocket Connection, which provides a bidirectional and low-latency communication channel between 
+the server and the client. 
+
+Due to the nature of the transport, each emit is sent in its own WebSocket frame(some emits may even result in two distinct WebSocket frames)
+
+4. What is HandShake?
+At the beginning of the Engine.iO connection, server sends some information 
+
+{
+  "sid": "FSDjX-WRwSA4zTZMALqx",
+  "upgrades": ["websocket"],
+  "pingInterval": 25000,
+  "pingTimeout": 20000
+}
+
+- the sid is the ID of the session, it must be included in the sid query parameter in all subsequent HTTP requests
+- the upgrades array contains the list of all "better" transports that are supported by the server
+- the pingInterval and pingTimeout values are used in the heartbeat mechanism
+
+By default, the client establishes the connection with the HTTP long-polling transport.
 
